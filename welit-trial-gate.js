@@ -108,7 +108,7 @@
     const topBar = document.createElement('aside');
     topBar.className = 'welit-promo-top';
     topBar.setAttribute('aria-label', '言點教育招生訊息');
-    const message = '<strong>想解鎖全部中文練習？</strong> 歡迎報名言點教育中文專科班｜香港荃灣南豐中心 1609B 室｜WhatsApp：6748 1044';
+    const message = '<strong>想解鎖全部中文練習？</strong> 歡迎報名言點教育中文專科班｜香港荃灣南豐中心 1609B 室｜WhatsApp：6478 1044';
     topBar.innerHTML = `
       <div class="welit-promo-marquee" aria-live="polite">
         <div class="welit-promo-track">
@@ -116,7 +116,7 @@
           <span class="welit-promo-message" aria-hidden="true">${message}</span>
         </div>
       </div>
-      <a class="welit-promo-cta" href="https://wa.me/85267481044" target="_blank" rel="noopener noreferrer" aria-label="以 WhatsApp 聯絡言點教育">WhatsApp 查詢</a>`;
+      <a class="welit-promo-cta" href="https://wa.me/85264781044" target="_blank" rel="noopener noreferrer" aria-label="以 WhatsApp 聯絡言點教育">WhatsApp 查詢</a>`;
     document.body.prepend(topBar);
 
     const dock = document.createElement('aside');
@@ -131,7 +131,7 @@
           </span>
           <span class="welit-promo-dock__hint">展開課程資料 ▴</span>
         </button>
-        <a class="welit-promo-dock__quick-cta" href="https://wa.me/85267481044" target="_blank" rel="noopener noreferrer">立即 WhatsApp 報名</a>
+        <a class="welit-promo-dock__quick-cta" href="https://wa.me/85264781044" target="_blank" rel="noopener noreferrer">立即 WhatsApp 報名</a>
       </div>
       <section class="welit-promo-dock__body" id="welit-promo-details" hidden>
         <div class="welit-promo-dock__hero">
@@ -140,7 +140,7 @@
             <h2>把學習的壓力，<span>變成孩子的自信。</span></h2>
             <p class="welit-promo-dock__intro">由小學基礎鞏固到 DSE 應試訓練，言點教育以系統化教材與貼身支援，陪學生逐步突破學習難關。</p>
           </div>
-          <a class="welit-promo-dock__hero-cta" href="https://wa.me/85267481044" target="_blank" rel="noopener noreferrer">WhatsApp 查詢課程 →</a>
+          <a class="welit-promo-dock__hero-cta" href="https://wa.me/85264781044" target="_blank" rel="noopener noreferrer">WhatsApp 查詢課程 →</a>
         </div>
         <div class="welit-promo-dock__course-grid" aria-label="言點教育課程服務">
           <article class="welit-promo-course"><span class="welit-promo-course__icon" aria-hidden="true">01</span><h3>小學專科班</h3><p>中、英、數專科班，聚焦基礎鞏固與學習習慣。</p></article>
