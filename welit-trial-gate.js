@@ -46,6 +46,36 @@
     .welit-flow-lock h2 { margin: 1.2rem 0 .55rem; color: #0f172a; font-size: 1.45rem; font-weight: 900; }
     .welit-flow-lock p { margin: 0; line-height: 1.7; font-weight: 650; }
     .welit-flow-lock a { display: inline-flex; margin-top: 1.35rem; min-height: 2.8rem; align-items: center; border-radius: .8rem; background: #0f766e; color: #fff; padding: .6rem 1rem; font-weight: 850; text-decoration: none; }
+    :root { --welit-promo-top: 2.75rem; --welit-promo-bottom: 3.4rem; }
+    body.welit-promo-ready { padding-top: var(--welit-promo-top) !important; padding-bottom: var(--welit-promo-bottom) !important; }
+    .welit-promo-top { position: fixed; inset: 0 0 auto; z-index: 12000; display: flex; min-height: var(--welit-promo-top); align-items: stretch; overflow: hidden; background: linear-gradient(90deg, #115e59, #0f766e 45%, #1d4ed8); color: #fff; box-shadow: 0 4px 16px rgba(15,23,42,.22); }
+    .welit-promo-marquee { min-width: 0; flex: 1; overflow: hidden; }
+    .welit-promo-track { display: flex; width: max-content; min-height: var(--welit-promo-top); align-items: center; animation: welit-marquee 28s linear infinite; white-space: nowrap; }
+    .welit-promo-top:hover .welit-promo-track, .welit-promo-top:focus-within .welit-promo-track { animation-play-state: paused; }
+    .welit-promo-message { display: inline-flex; align-items: center; gap: .6rem; padding-right: 3rem; font-size: .9rem; font-weight: 850; letter-spacing: .01em; }
+    .welit-promo-message strong { color: #fef08a; }
+    .welit-promo-cta { z-index: 1; display: inline-flex; flex: 0 0 auto; align-items: center; justify-content: center; padding: .55rem .85rem; background: rgba(15,23,42,.32); color: #fff; font-size: .78rem; font-weight: 900; text-decoration: none; white-space: nowrap; }
+    .welit-promo-cta:hover, .welit-promo-cta:focus-visible { background: rgba(15,23,42,.55); }
+    @keyframes welit-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .welit-promo-dock { position: fixed; z-index: 12000; right: 0; bottom: 0; left: 0; max-height: calc(var(--welit-promo-bottom) + env(safe-area-inset-bottom)); overflow: hidden; border-top: 1px solid rgba(45,212,191,.42); background: rgba(255,255,255,.97); box-shadow: 0 -7px 22px rgba(15,23,42,.15); transition: max-height .3s ease; backdrop-filter: blur(10px); }
+    .welit-promo-dock.is-open { max-height: min(34rem, 78dvh); }
+    .welit-promo-dock__toggle { display: flex; min-height: var(--welit-promo-bottom); width: 100%; align-items: center; justify-content: space-between; gap: .7rem; border: 0; background: transparent; color: #0f172a; padding: .65rem 1rem calc(.65rem + env(safe-area-inset-bottom)); text-align: left; }
+    .welit-promo-dock__toggle:hover { background: #f0fdfa; }
+    .welit-promo-dock__label { display: flex; min-width: 0; align-items: center; gap: .55rem; font-size: .9rem; font-weight: 900; }
+    .welit-promo-dock__badge { display: inline-flex; height: 1.7rem; width: 1.7rem; flex: 0 0 auto; align-items: center; justify-content: center; border-radius: .55rem; background: #0f766e; color: #fff; font-size: .78rem; }
+    .welit-promo-dock__hint { color: #0f766e; font-size: .75rem; font-weight: 850; white-space: nowrap; }
+    .welit-promo-dock__body { border-top: 1px solid #ccfbf1; padding: 1rem 1rem calc(1rem + env(safe-area-inset-bottom)); color: #334155; }
+    .welit-promo-dock__body h2 { color: #0f172a; font-size: 1.12rem; font-weight: 950; }
+    .welit-promo-dock__body p { margin-top: .55rem; font-size: .9rem; font-weight: 650; line-height: 1.6; }
+    .welit-promo-dock__tags { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: .8rem; }
+    .welit-promo-dock__tag { border: 1px solid #99f6e4; border-radius: 999px; background: #f0fdfa; color: #115e59; padding: .3rem .55rem; font-size: .75rem; font-weight: 850; }
+    .welit-promo-dock__actions { display: flex; flex-wrap: wrap; gap: .65rem; margin-top: 1rem; }
+    .welit-promo-dock__actions a { display: inline-flex; min-height: 2.55rem; align-items: center; justify-content: center; border-radius: .75rem; padding: .55rem .8rem; font-size: .85rem; font-weight: 900; text-decoration: none; }
+    .welit-promo-dock__whatsapp { background: #0f766e; color: #fff; }
+    .welit-promo-dock__whatsapp:hover { background: #115e59; }
+    .welit-promo-dock__address { border: 1px solid #cbd5e1; background: #f8fafc; color: #334155; }
+    @media (max-width: 640px) { .welit-promo-message { padding-right: 2rem; font-size: .76rem; } .welit-promo-cta { padding: .5rem .65rem; font-size: .68rem; } .welit-promo-dock__toggle { padding-inline: .75rem; } .welit-promo-dock__hint { font-size: .68rem; } }
+    @media (prefers-reduced-motion: reduce) { .welit-promo-track { animation: none; transform: none; } }
   `;
   document.head.appendChild(style);
 
@@ -54,6 +84,58 @@
       <span class="welit-brand-mark__icon" aria-hidden="true">W</span>
       <span class="welit-brand-mark__name">言點教育<span class="welit-brand-mark__en">Welit Education</span></span>
     </span>`;
+
+  function setupPromotions() {
+    if (document.querySelector('.welit-promo-top') || document.querySelector('.welit-promo-dock')) return;
+    document.body.classList.add('welit-promo-ready');
+
+    const topBar = document.createElement('aside');
+    topBar.className = 'welit-promo-top';
+    topBar.setAttribute('aria-label', '言點教育招生訊息');
+    const message = '<strong>想解鎖全部中文練習？</strong> 歡迎報名言點教育中文專科班｜香港荃灣南豐中心 1609B 室｜WhatsApp：6748 1044';
+    topBar.innerHTML = `
+      <div class="welit-promo-marquee" aria-live="polite">
+        <div class="welit-promo-track">
+          <span class="welit-promo-message">${message}</span>
+          <span class="welit-promo-message" aria-hidden="true">${message}</span>
+        </div>
+      </div>
+      <a class="welit-promo-cta" href="https://wa.me/85267481044" target="_blank" rel="noopener noreferrer" aria-label="以 WhatsApp 聯絡言點教育">WhatsApp 查詢</a>`;
+    document.body.prepend(topBar);
+
+    const dock = document.createElement('aside');
+    dock.className = 'welit-promo-dock';
+    dock.setAttribute('aria-label', '言點教育課程服務');
+    dock.innerHTML = `
+      <button class="welit-promo-dock__toggle" type="button" aria-expanded="false" aria-controls="welit-promo-details">
+        <span class="welit-promo-dock__label"><span class="welit-promo-dock__badge" aria-hidden="true">W</span>關注言點教育課程</span>
+        <span class="welit-promo-dock__hint">展開課程資料 ▴</span>
+      </button>
+      <div class="welit-promo-dock__body" id="welit-promo-details" hidden>
+        <h2>言點教育 Welit Education</h2>
+        <p><strong>服務內容：</strong>小學中、英、數專科班；升中面試班；中學專科補習（中、英、數、科學）；高中地理、經濟（ECON）、物理（PHY）、化學（CHEM）。</p>
+        <p>涵蓋初中（中一至中三）基礎鞏固，以及高中香港中學文憑考試（DSE）的應試技巧、題型突破與時間管理訓練。</p>
+        <p><strong>特色教學：</strong>採用小班教學、系統化教材與定期評估，並支援特殊教育需要（SEN）教學。</p>
+        <div class="welit-promo-dock__tags" aria-label="課程特色">
+          <span class="welit-promo-dock__tag">小班教學</span><span class="welit-promo-dock__tag">系統化教材</span><span class="welit-promo-dock__tag">定期評估</span><span class="welit-promo-dock__tag">SEN 教學支援</span>
+        </div>
+        <div class="welit-promo-dock__actions">
+          <a class="welit-promo-dock__whatsapp" href="https://wa.me/85267481044" target="_blank" rel="noopener noreferrer">WhatsApp：6748 1044</a>
+          <a class="welit-promo-dock__address" href="https://www.google.com/maps/search/?api=1&query=%E9%A6%99%E6%B8%AF%E8%8D%83%E7%81%A3%E5%8D%97%E8%B1%90%E4%B8%AD%E5%BF%831609B%E5%AE%A4" target="_blank" rel="noopener noreferrer">香港荃灣南豐中心 1609B 室</a>
+        </div>
+      </div>`;
+    const toggle = dock.querySelector('.welit-promo-dock__toggle');
+    const details = dock.querySelector('#welit-promo-details');
+    const hint = dock.querySelector('.welit-promo-dock__hint');
+    toggle.addEventListener('click', () => {
+      const expanded = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!expanded));
+      details.hidden = expanded;
+      dock.classList.toggle('is-open', !expanded);
+      hint.textContent = expanded ? '展開課程資料 ▴' : '收合課程資料 ▾';
+    });
+    document.body.appendChild(dock);
+  }
 
   function showLockModal(message) {
     const existing = document.querySelector('.welit-lock-modal');
@@ -243,13 +325,18 @@
   function initialise() {
     if (levelMatch && levelMatch[1] === 'advanced') {
       lockAdvancedPage();
+      setupPromotions();
       return;
     }
     if (fileName === 'index.html' || fileName === '') {
       setupHomePage();
+      setupPromotions();
       return;
     }
-    if (!rule) return;
+    if (!rule) {
+      setupPromotions();
+      return;
+    }
     applyDirectoryLimits();
     enforceQuestionLimit();
     interceptQuestionNext();
@@ -264,6 +351,7 @@
       });
     };
     new MutationObserver(scheduleApply).observe(document.body, { childList: true, subtree: true });
+    setupPromotions();
   }
 
   if (document.readyState === 'loading') {
