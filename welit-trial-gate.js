@@ -333,9 +333,9 @@
   }
 
   function setupHomePage() {
-    document.title = '言點教育 Welit Education｜小學中國語文公開試用';
+    document.title = '言點教育 Welit Education｜小學中國語文公開試用題庫';
     const description = document.querySelector('meta[name="description"]');
-    if (description) description.content = '言點教育 Welit Education 小學中國語文公開試用題庫：免登入、免密碼、無資料儲存。';
+    if (description) description.content = '言點教育 Welit Education 小學中國語文公開試用題庫：免登入、即時練習，體驗精選中文題目；完整課程歡迎以 WhatsApp 查詢。';
     const heading = document.querySelector('header h1');
     if (heading) heading.textContent = '言點教育 Welit Education';
     const subheading = document.querySelector('header h1 + p');
